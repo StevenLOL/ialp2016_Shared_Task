@@ -1,3 +1,9 @@
+import platform; print(platform.platform())
+import sys; print("Python", sys.version)
+import numpy; print("NumPy", numpy.__version__)
+import scipy; print("SciPy", scipy.__version__)
+import sklearn; print("Scikit-Learn", sklearn.__version__)
+
 import pandas as pd
 import numpy as np
 import os
@@ -22,28 +28,28 @@ import cPickle as pickle
 
 fiels_wordvectors=[
 
-        ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_CB.txt'),
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_SG.txt'),
-     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_CB.txt'),
- ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_SG.txt'),
+    #    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_CB.txt'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_SG.txt'),
+    # ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_CB.txt'),
+# ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_SG.txt'),
 
 
 
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_100_CB.txt'),
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_100_SG.txt'),
-     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_300_CB.txt'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_100_CB.txt'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_100_SG.txt'),
+    # ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_300_CB.txt'),
     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_P_300_SG.txt'),
 
 
 
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_100_CB.txt'),
-     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_100_SG.txt'),
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_300_CB.txt'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_100_CB.txt'),
+    # ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_100_SG.txt'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_300_CB.txt'),
     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/CWE_L_300_SG.txt'),
 
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_100_CB.vec'),
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_100_SG.vec'),
-    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_300_CB.vec'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_100_CB.vec'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_100_SG.vec'),
+    #('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_300_CB.vec'),
     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/fasttext_300_SG.vec'),
 
 
@@ -66,8 +72,8 @@ def evalTrainData(trainDatax,trainV,random_state=2016,eid=''):
             cvTrainx,cvTrainy=trainDatax[trainIndex],trainV[trainIndex]
             cvEvalx,cvEvaly=trainDatax[evalIndex],trainV[evalIndex]
             #print cvTrainx.shape,cvEvalx.shape
-            #scaler=StandardScaler()
-            #cvTrainy=scaler.fit_transform(cvTrainy)
+            scaler=StandardScaler()
+            cvTrainy=scaler.fit_transform(cvTrainy.reshape(-1, 1)).ravel()
             ###pca=PCA(n_components=100)
             ###cvTrainx=pca.fit_transform(cvTrainx)
             ###cvEvalx=pca.transform(cvEvalx)
@@ -83,7 +89,7 @@ def evalTrainData(trainDatax,trainV,random_state=2016,eid=''):
             lsvr.fit(cvTrainx,cvTrainy)
             predict=lsvr.predict(cvEvalx)
             ##predict=np.exp(predict)-1
-            #predict=scaler.inverse_transform(predict)
+            predict=scaler.inverse_transform(predict.reshape(-1,1)).ravel()
             score=mean_absolute_error(cvEvaly,predict)
             score2=mean_squared_error(cvEvaly,predict)
             pcc=np.corrcoef(cvEvaly,predict)[0, 1]
@@ -99,7 +105,7 @@ pca_n_components=100
 def getxlf(random_state=2016):
     xlf1= Pipeline([
                           ('svd',PCA(n_components=pca_n_components)),
-                          ('regressor',AdaBoostRegressor(
+                          ('regressor',AdaBoostRegressor(#random_state=random_state,
 
                         base_estimator=  MLPRegressor(random_state=random_state,early_stopping=True,max_iter=2000)
                                                          ,n_estimators=30,learning_rate=0.01)),
@@ -116,7 +122,7 @@ def getxlf(random_state=2016):
     xlf4=Pipeline([
                           #('svd',PCA(n_components=pca_n_components)),
                           #('norm',StandardScaler()),
-                          ('regressor', LinearSVR(random_state=random_state)
+                          ('regressor', GradientBoostingRegressor(random_state=random_state)
                            #LinearSVR()
                            #GradientBoostingRegressor()
                            #MLPRegressor(random_state=random_state,early_stopping=True,max_iter=2000)
@@ -142,7 +148,7 @@ def getxlf(random_state=2016):
                         seed=random_state,
                         missing=None)
 
-    return xlf4
+    return xlf1
 
 
 def processTraining(emid=0,targetfilename='./paper_cache/pv01.pickle'):
