@@ -5,7 +5,7 @@ Here is the systems for following paper, downoad the code and data , one could r
 Aicyber’s System for [IALP 2016 Shared Task](http://nlp.innobic.yzu.edu.tw/tasks/
 dsa_w/): Character-enhanced Word Vectors and Boosted Neural Networks
 
-For paper and final test results please refer to the files in [paper folder]('./paper/').
+For paper and final test results please refer to the files in [paper folder](paper).
 
 #Prerequisites
 
