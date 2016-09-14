@@ -19,7 +19,7 @@ sudo pip install xgboost
 
 #Evaluations
 
-##Features VS LSVR baseline
+##Table 1: Features VS LSVR baseline
 ```
 python table_1_LSVR.py
 ```
@@ -38,18 +38,18 @@ load from cache
 ...
 ...
 ```
-##Features VS BNN
+##Table 2: Features VS BNN
 ```
 python ./table_2_BNN.py
 ```
-##LSVR, BNN VS NN GBM XGB
+##Table 3: LSVR, BNN VS NN GBM XGB
 ```
 python ./table_3_NN.py
 python ./table_3_GBM.py
 python ./table_3_XGB.py
 ```
 
-## PCA100 BNN VS BNN_Norm
+##Table 4: PCA100 BNN VS BNN_Norm
 
 ```
 python ./table_4_PCA100_BNN.py
