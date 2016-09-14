@@ -100,7 +100,6 @@ def evalTrainData(trainDatax,trainV,random_state=2016,eid=''):
 
     print ('###',eid,'MAE',np.mean(scores),'PCC',np.mean(pccs))
 
-
 pca_n_components=100
 def getxlf(random_state=2016):
     xlf1= Pipeline([
