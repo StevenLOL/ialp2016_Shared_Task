@@ -1,4 +1,4 @@
-Here is the data folder for the shared task.
+Here is data folder for shared task.
 
 #Files in the folder
 \*.pickle are data files contrain training vectors, training target , test vectors, test ids
