@@ -1,6 +1,6 @@
 # ialp2016_Shared_Task
 
-Here is the systems for following paper, downoad the code and data , one could reproduce all the results.
+Here is the system for following paper, downoad the code and data , one could reproduce all the results.
 
 Aicyber’s System for [IALP 2016 Shared Task](http://nlp.innobic.yzu.edu.tw/tasks/
 dsa_w/): Character-enhanced Word Vectors and Boosted Neural Networks
