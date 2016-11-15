@@ -22,9 +22,9 @@ import cPickle as pickle
 
 fiels_wordvectors=[
 
-  #      ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_CB.txt'),
-  #  ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_SG.txt'),
-  #   ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_CB.txt'),
+        ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_CB.txt'),
+    ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_100_SG.txt'),
+     ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_CB.txt'),
  ('loadFasttextWord2Vector','/data1/ML_DATA/NLP/w2v/IALP/w2v_300_SG.txt'),
 
 
